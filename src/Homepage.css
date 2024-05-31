@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap');
+.h11 {
+    font-family: "Blinker", sans-serif;
+    font-weight: 500; 
+    color: white;
+    font-size: xx-large;
+}
+
+.h12 {
+    font-family: "Black Ops One", system-ui;
+    color: white;
+    font-size: xx-large;
+}
+
+p {
+    font-family: "Blinker", sans-serif;
+    color: white;
+    font-size: larger;
+}
+
+button {
+    background-color: #00B2CF;
+    font-family: "Black Ops One", system-ui;
+    height: 50px;
+    width: 300px;
+    border-radius: 15px;
+    font-size: larger;
+}
