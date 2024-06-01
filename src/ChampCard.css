@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+
+
+.champ-card {
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 16px;
+    text-align: center;
+    margin: 16px;
+    width: 200px;
+    background-color: #2B2A2A;
+  }
+  
+  .champ-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .champ-name {
+    font-size: 1.2em;
+    margin: 8px 0;
+    color: #C8AA6E;
+    font-family: "Black Ops One", system-ui;
+    font-weight: 400;
+  }
+  
+  .champ-blurb {
+    font-size: 0.9em;
+    color: white;
+    font-family: "Blinker", sans-serif;
+  }

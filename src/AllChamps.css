@@ -1,0 +1,37 @@
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .champ-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #00B2CFf;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+h1 {
+    color: #C8AA6E;
+    font-family: "Black Ops One", system-ui;
+    font-weight: 400;
+}
+
+p {
+    font-family: "Blinker", sans-serif;
+    color: white;
+}
+
