@@ -54,7 +54,7 @@ export default function AllChamps({ champData }) {
       <h1>All Champs</h1>
       <p>Filter by champ type and difficulty level to find the perfect match for your play style</p>
       <div className="filter-controls">
-        <select value={selectedType} aria-label="Type" onChange={handleTypeChange}>
+        <select value={selectedType} className='dropdown' aria-label="Type" onChange={handleTypeChange}>
           <option value="">All Types</option>
           <option value="Fighter">Fighter</option>
           <option value="Mage">Mage</option>
@@ -62,7 +62,7 @@ export default function AllChamps({ champData }) {
           <option value="Tank">Tank</option>
           <option value="Support">Support</option>
         </select>
-        <select value={selectedDifficulty} aria-label="Difficulty" onChange={handleDifficultyChange}>
+        <select value={selectedDifficulty} className='dropdown' aria-label="Difficulty" onChange={handleDifficultyChange}>
           <option value="">All Difficulties</option>
           <option value="1">1 - Easy</option>
           <option value="2">2 - Moderate</option>
@@ -71,13 +71,14 @@ export default function AllChamps({ champData }) {
           <option value="5">5 - Extreme</option>
         </select>
         <input
+          className='search'
           type="text"
           placeholder="Search champions..."
           aria-label="Search champions"
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <button onClick={handleClearSearch}>Clear Search</button>
+        <button className='clear-button' onClick={handleClearSearch}>Clear Search</button>
       </div>
       <div className="champ-grid">
         {filteredChampions.length > 0 ? (
