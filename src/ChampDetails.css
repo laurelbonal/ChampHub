@@ -1,0 +1,128 @@
+body, html, #root {
+    height: 100%;
+    margin: 0;
+    background-color: #161f32;
+    color: white;
+    font-family: "Blinker", sans-serif;
+  }
+  
+  .champion-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .champion-container {
+    display: flex;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    flex-grow: 1;
+  }
+  
+  .champion-image {
+    flex: 1;
+    padding-right: 20px;
+    max-width: 100%;
+  }
+  
+  .champion-image img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  
+  .champion-info {
+    flex: 2;
+    padding-left: 20px;
+  }
+  
+  .champion-info h1 {
+    font-size: 2.5em;
+    color: #C8AA6E;
+  }
+  
+  .champion-info h2 {
+    font-size: 1.5em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .champion-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .champion-difficulty, .champion-role {
+    background-color: #555;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .champion-blurb {
+    margin-top: 20px;
+    font-size: 1.1em;
+    line-height: 1.5em;
+  }
+  
+  select {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1em;
+    background-color: #333;
+    color: #C8AA6E;
+    border: 1px solid #C8AA6E;
+    border-radius: 5px;
+  }
+  
+  .ability-details {
+    margin-top: 20px;
+    background-color: #2b2b3a;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .ability-details h3 {
+    color: #C8AA6E;
+    font-size: 1.5em;
+  }
+  
+  .ability-details p {
+    font-size: 1.1em;
+    line-height: 1.5em;
+  }
+  
+  button {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .ally-tips {
+    background-color: #1D3F33;
+  }
+
+  .enemy-tips {
+    background-color: #A93925;
+    
+  }
+
+  .home-button {
+    background-color: #2B2A2A;
+    color: #C8AA6E;
+  }
+  
+  button:hover {
+    background-color: #003d80;
+    color: white;
+  }
+  
+  .filter-controls, .champ-grid, .champion-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }

@@ -54,7 +54,7 @@ export default function AllChamps({ champData }) {
       <h1>All Champs</h1>
       <p>Filter by champ type and difficulty level to find the perfect match for your play style</p>
       <div className="filter-controls">
-        <select value={selectedType} onChange={handleTypeChange}>
+        <select value={selectedType} aria-label="Type" onChange={handleTypeChange}>
           <option value="">All Types</option>
           <option value="Fighter">Fighter</option>
           <option value="Mage">Mage</option>
@@ -62,7 +62,7 @@ export default function AllChamps({ champData }) {
           <option value="Tank">Tank</option>
           <option value="Support">Support</option>
         </select>
-        <select value={selectedDifficulty} onChange={handleDifficultyChange}>
+        <select value={selectedDifficulty} aria-label="Difficulty" onChange={handleDifficultyChange}>
           <option value="">All Difficulties</option>
           <option value="1">1 - Easy</option>
           <option value="2">2 - Moderate</option>
@@ -73,6 +73,7 @@ export default function AllChamps({ champData }) {
         <input
           type="text"
           placeholder="Search champions..."
+          aria-label="Search champions"
           value={searchTerm}
           onChange={handleSearchChange}
         />
@@ -83,6 +84,7 @@ export default function AllChamps({ champData }) {
           filteredChampions.map(champ => (
             <ChampCard
               key={champ.id}
+              name={champ.id} // Use the champion's name for navigation
               image={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`}
               name={champ.name}
               blurb={champ.blurb}
