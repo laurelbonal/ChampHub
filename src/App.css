@@ -9,13 +9,14 @@
 .header {
   background-color: #2B2A2A;
   color: #C8AA6E;
-  height: 65px;
-  font-family: "Black Ops One", system-ui;
-  font-weight: 400;
+  height: 50px;
   font-style: normal;
   font-size: large;
   padding: 20px;
   text-align: left;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .header-link {

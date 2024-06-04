@@ -8,7 +8,7 @@ export default function ChampDetails() {
   const navigate = useNavigate();
   const [champion, setChampion] = useState(null);
   const [selectedAbility, setSelectedAbility] = useState(null);
-  const [displayTips, setDisplayTips] = useState(null); // null, 'ally', 'enemy'
+  const [activeTab, setActiveTab] = useState('about'); // New state for active tab
   const [error, setError] = useState(false); // Error state
 
   useEffect(() => {
@@ -34,11 +34,6 @@ export default function ChampDetails() {
       const keys = ['Q', 'W', 'E', 'R'];
       setSelectedAbility({ ...champion.spells[abilityIndex], key: keys[abilityIndex] });
     }
-    setDisplayTips(null); 
-  };
-
-  const handleDisplayTips = (type) => {
-    setDisplayTips(type);
   };
 
   if (error) {
@@ -47,17 +42,16 @@ export default function ChampDetails() {
         <h2>Cannot display that champion's data right now.</h2>
         <button className='home-button' onClick={() => navigate('/Champions')}>Back to All Champs</button>
       </div>
-    )
-    
+    );
   }
 
   if (!champion) {
     return <div>Loading...</div>;
   }
 
-  const tipsToDisplay = displayTips === 'ally' ? champion.allytips : displayTips === 'enemy' ? champion.enemytips : null;
-  const titleToDisplay = displayTips === 'ally' ? 'Ally Tips' : 'Enemy Tips';
-  const tipsContent = tipsToDisplay && tipsToDisplay.length > 0 ? tipsToDisplay.join(' ') : 'No tips at this time.';
+  const renderTips = (tips) => (
+    tips.length > 0 ? tips.join(' ') : 'No tips at this time.'
+  );
 
   return (
     <div className="champion-details">
@@ -76,13 +70,21 @@ export default function ChampDetails() {
               <span>Role: {champion.tags.join(', ')}</span>
             </div>
           </div>
-          <div className="champion-blurb-abilities-container">
+          <div className="nav-tabs">
+            <button onClick={() => setActiveTab('about')} className={activeTab === 'about' ? 'active' : ''}>About</button>
+            <button onClick={() => setActiveTab('abilities')} className={activeTab === 'abilities' ? 'active' : ''}>Abilities</button>
+            <button onClick={() => setActiveTab('ally-tips')} className={activeTab === 'ally-tips' ? 'active' : ''}>Ally Tips</button>
+            <button onClick={() => setActiveTab('enemy-tips')} className={activeTab === 'enemy-tips' ? 'active' : ''}>Enemy Tips</button>
+          </div>
+          {activeTab === 'about' && (
             <div className='about'>
-              <h2>{displayTips ? titleToDisplay : 'About'}</h2>
+              <h2>About</h2>
               <p className="champion-blurb">
-                {displayTips ? tipsContent : champion.blurb}
+                {champion.lore}
               </p>
             </div>
+          )}
+          {activeTab === 'abilities' && (
             <div className="abilities-container">
               <h2>Abilities</h2>
               <select aria-label='ability' onChange={handleAbilityChange}>
@@ -100,11 +102,19 @@ export default function ChampDetails() {
                 </div>
               )}
             </div>
-          </div>
-          <div className="tips-buttons">
-            <button className='ally-tips' onClick={() => handleDisplayTips('ally')}>Ally Tips</button>
-            <button className='enemy-tips' onClick={() => handleDisplayTips('enemy')}>Enemy Tips</button>
-          </div>
+          )}
+          {activeTab === 'ally-tips' && (
+            <div className="tips-section">
+              <h2>Ally Tips</h2>
+              <p>{renderTips(champion.allytips)}</p>
+            </div>
+          )}
+          {activeTab === 'enemy-tips' && (
+            <div className="tips-section">
+              <h2>Enemy Tips</h2>
+              <p>{renderTips(champion.enemytips)}</p>
+            </div>
+          )}
           <button className='home-button' onClick={() => navigate('/Champions')}>Back to All Champs</button>
         </div>
       </div>

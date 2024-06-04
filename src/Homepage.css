@@ -21,6 +21,7 @@ p {
 button {
     background-color: #00B2CF;
     font-family: "Black Ops One", system-ui;
+    color: black;
     height: 50px;
     width: 300px;
     border-radius: 15px;

@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <main className="App">
         <header className="header">
-          <Link to="/" className="header-link">
+          <Link to="/" className="header-link" aria-label='back-to-home'>
             <h1>ChampionHub</h1>
           </Link>
         </header>
