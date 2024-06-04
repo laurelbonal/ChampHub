@@ -6,7 +6,10 @@ function ChampCard({ name, image, blurb }) {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`/Champion/${name}`);
+    const formattedNameOne = name.split(" ").join('')
+    const formattedNameTwo = formattedNameOne.split("'").join('')
+    const formattedName = formattedNameTwo.charAt(0) + formattedNameTwo.substring(1).toLowerCase()
+    navigate(`/Champion/${formattedName}`);
   };
 
   return (

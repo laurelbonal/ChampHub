@@ -8,18 +8,18 @@ export default function ChampDetails() {
   const navigate = useNavigate();
   const [champion, setChampion] = useState(null);
   const [selectedAbility, setSelectedAbility] = useState(null);
-  const [activeTab, setActiveTab] = useState('about'); // New state for active tab
-  const [error, setError] = useState(false); // Error state
+  const [activeTab, setActiveTab] = useState('about'); 
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchChampionDetails = async () => {
       try {
         const champDetails = await getChampDetails(name);
         setChampion(champDetails);
-        setSelectedAbility({ ...champDetails.passive, key: 'Passive' }); // Set the default selected ability to passive
+        setSelectedAbility({ ...champDetails.passive, key: 'Passive' }); 
       } catch (error) {
         console.error('Error fetching champion details:', error);
-        setError(true); // Set error state to true if API call fails
+        setError(true);
       }
     };
 

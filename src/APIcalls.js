@@ -8,7 +8,11 @@ export const getChamps = async () => {
 };
 
 export const getChampDetails = async (name) => {
-  const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/14.11.1/data/en_US/champion/${name}.json`);
+  const formattedNameOne = name.split(" ").join('')
+  const formattedNameTwo = formattedNameOne.split("'").join('')
+  const formattedName = formattedNameTwo.charAt(0) + formattedNameTwo.substring(1).toLowerCase()
+  console.log(formattedName)
+  const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/14.11.1/data/en_US/champion/${formattedName}.json`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
