@@ -87,7 +87,6 @@ export default function AllChamps({ champData }) {
           filteredChampions.map(champ => (
             <ChampCard
               key={champ.id}
-              name={champ.id} 
               image={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`}
               name={champ.name}
               blurb={champ.blurb}
