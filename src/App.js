@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/Champions' element={<AllChamps champData={champData} />} />
-          <Route path='/Champion/:name/:tab?' element={<ChampDetails />} /> 
+          <Route path='/Champion/:name/:tab/:ability?' element={<ChampDetails />} /> 
         </Routes>
       </main>
     </BrowserRouter>
