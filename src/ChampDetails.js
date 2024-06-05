@@ -3,6 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getChampDetails } from './APIcalls';
 import './ChampDetails.css';
 
+const validTabs = ['about', 'abilities', 'ally-tips', 'enemy-tips'];
+const validAbilities = ['Passive', 'Q', 'W', 'E', 'R'];
+
 export default function ChampDetails() {
   const { name, tab, ability } = useParams();
   const navigate = useNavigate();
@@ -12,10 +15,19 @@ export default function ChampDetails() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (!tab) {
-      navigate(`/champion/${name}/about`, { replace: true });
+    // Validate tab and ability
+    const isValidTab = validTabs.includes(tab);
+    const isValidAbility = !ability || validAbilities.includes(ability);
+
+    if (!isValidTab || !isValidAbility) {
+      navigate('/error', { replace: true });
+      return;
     }
-  }, [name, tab, navigate]);
+
+    if (!tab) {
+      navigate(`/Champion/${name}/about`, { replace: true });
+    }
+  }, [name, tab, ability, navigate]);
 
   useEffect(() => {
     const fetchChampionDetails = async () => {
@@ -51,16 +63,16 @@ export default function ChampDetails() {
 
   const handleTabChange = (tab) => {
     if (tab === 'abilities' && !ability) {
-      navigate(`/champion/${name}/abilities/Passive`, { replace: true });
+      navigate(`/Champion/${name}/abilities/Passive`, { replace: true });
     } else {
-      navigate(`/champion/${name}/${tab}`, { replace: true });
+      navigate(`/Champion/${name}/${tab}`, { replace: true });
     }
     setActiveTab(tab);
   };
 
   const handleAbilityChange = (e) => {
     const abilityKey = e.target.value;
-    navigate(`/champion/${name}/abilities/${abilityKey}`, { replace: true });
+    navigate(`/Champion/${name}/abilities/${abilityKey}`, { replace: true });
   };
 
   if (error) {

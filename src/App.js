@@ -7,7 +7,6 @@ import AllChamps from './AllChamps';
 import ChampDetails from './ChampDetails';
 import ErrorPage from './ErrorPage';
 
-
 function App() {
   const [champData, setChampData] = useState([]);
 
