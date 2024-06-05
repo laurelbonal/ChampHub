@@ -92,6 +92,8 @@ export default function ChampDetails() {
     tips.length > 0 ? tips.join(' ') : 'No tips at this time.'
   );
 
+  console.log('Selected Ability:', selectedAbility);
+
   return (
     <div className="champion-details">
       <div className="champion-container">
@@ -137,6 +139,9 @@ export default function ChampDetails() {
               {selectedAbility && (
                 <div className="ability-details">
                   <h3>{`[${selectedAbility.key}] ${selectedAbility.name}`}</h3>
+                  {selectedAbility.image && (
+                    <img src={`https://ddragon.leagueoflegends.com/cdn/14.11.1/img/spell/${selectedAbility.image.full}`} alt={`${selectedAbility.name} icon`} />
+                  )}
                   <p>{selectedAbility.description}</p>
                 </div>
               )}
