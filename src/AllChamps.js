@@ -51,32 +51,36 @@ export default function AllChamps({ champData }) {
 
   return (
     <div>
-      <h1>All Champs</h1>
-      <p>Filter by champ type and difficulty level to find the perfect match for your play style</p>
-      <div className="filter-controls">
-        <select value={selectedType} onChange={handleTypeChange}>
-          <option value="">All Types</option>
-          <option value="Fighter">Fighter</option>
-          <option value="Mage">Mage</option>
-          <option value="Assassin">Assassin</option>
-          <option value="Tank">Tank</option>
-          <option value="Support">Support</option>
-        </select>
-        <select value={selectedDifficulty} onChange={handleDifficultyChange}>
-          <option value="">All Difficulties</option>
-          <option value="1">1 - Easy</option>
-          <option value="2">2 - Moderate</option>
-          <option value="3">3 - Hard</option>
-          <option value="4">4 - Very Hard</option>
-          <option value="5">5 - Extreme</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Search champions..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-        <button onClick={handleClearSearch}>Clear Search</button>
+      <div className="sticky-container">
+        <h1>All Champs</h1>
+        <p>Filter by champ type and difficulty level to find the perfect match for your play style</p>
+        <div className="filter-controls">
+          <select value={selectedType} className='dropdown' aria-label="Type" onChange={handleTypeChange}>
+            <option value="">All Types</option>
+            <option value="Fighter">Fighter</option>
+            <option value="Mage">Mage</option>
+            <option value="Assassin">Assassin</option>
+            <option value="Tank">Tank</option>
+            <option value="Support">Support</option>
+          </select>
+          <select value={selectedDifficulty} className='dropdown' aria-label="Difficulty" onChange={handleDifficultyChange}>
+            <option value="">All Difficulties</option>
+            <option value="1">1 - Easy</option>
+            <option value="2">2 - Moderate</option>
+            <option value="3">3 - Hard</option>
+            <option value="4">4 - Very Hard</option>
+            <option value="5">5 - Extreme</option>
+          </select>
+          <input
+            className='search'
+            type="text"
+            placeholder="Search champions..."
+            aria-label="Search champions"
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+          <button className='clear-button' onClick={handleClearSearch}>Clear</button>
+        </div>
       </div>
       <div className="champ-grid">
         {filteredChampions.length > 0 ? (

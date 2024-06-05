@@ -1,19 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 
-.App {
+.App, body {
   text-align: center;
   background-color: #161f32;
   height: 100%;
 }
 
-.App-header {
+.header {
   background-color: #2B2A2A;
   color: #C8AA6E;
-  height: 65px;
-  font-family: "Black Ops One", system-ui;
-  font-weight: 400;
+  height: 50px;
   font-style: normal;
-  font-size: xx-large;
-  padding: 25px;
+  font-size: large;
+  padding: 20px;
   text-align: left;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.header-link {
+  text-decoration: none;
+  color: inherit;
 }
