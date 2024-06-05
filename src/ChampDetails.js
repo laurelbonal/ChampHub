@@ -4,12 +4,18 @@ import { getChampDetails } from './APIcalls';
 import './ChampDetails.css';
 
 export default function ChampDetails() {
-  const { name } = useParams();
+  const { name, tab } = useParams();
   const navigate = useNavigate();
   const [champion, setChampion] = useState(null);
   const [selectedAbility, setSelectedAbility] = useState(null);
-  const [activeTab, setActiveTab] = useState('about'); 
+  const [activeTab, setActiveTab] = useState(tab || 'about'); 
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!tab) {
+      navigate(`/champion/${name}/about`, { replace: true });
+    }
+  }, [name, tab, navigate]);
 
   useEffect(() => {
     const fetchChampionDetails = async () => {
@@ -25,6 +31,12 @@ export default function ChampDetails() {
 
     fetchChampionDetails();
   }, [name]);
+
+  useEffect(() => {
+    if (tab) {
+      setActiveTab(tab);
+    }
+  }, [tab]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
