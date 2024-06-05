@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { getChamps } from './APIcalls';
 import AllChamps from './AllChamps';
 import ChampDetails from './ChampDetails';
+import ErrorPage from './ErrorPage';
+
 
 function App() {
   const [champData, setChampData] = useState([]);
@@ -27,6 +29,7 @@ function App() {
           <Route path='/' element={<Homepage />} />
           <Route path='/Champions' element={<AllChamps champData={champData} />} />
           <Route path='/Champion/:name/:tab/:ability?' element={<ChampDetails />} /> 
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
       </main>
     </BrowserRouter>
