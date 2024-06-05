@@ -26,6 +26,11 @@ export default function ChampDetails() {
     fetchChampionDetails();
   }, [name]);
 
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    navigate(`/champion/${name}/${tab}`, { replace: true });
+  };
+
   const handleAbilityChange = (e) => {
     const abilityIndex = e.target.value;
     if (abilityIndex === 'passive') {
@@ -71,10 +76,10 @@ export default function ChampDetails() {
             </div>
           </div>
           <div className="nav-tabs">
-            <button onClick={() => setActiveTab('about')} className={activeTab === 'about' ? 'active' : ''}>About</button>
-            <button onClick={() => setActiveTab('abilities')} className={activeTab === 'abilities' ? 'active' : ''}>Abilities</button>
-            <button onClick={() => setActiveTab('ally-tips')} className={activeTab === 'ally-tips' ? 'active' : ''}>Ally Tips</button>
-            <button onClick={() => setActiveTab('enemy-tips')} className={activeTab === 'enemy-tips' ? 'active' : ''}>Enemy Tips</button>
+            <button onClick={() => handleTabChange('about')} className={activeTab === 'about' ? 'active' : ''}>About</button>
+            <button onClick={() => handleTabChange('abilities')} className={activeTab === 'abilities' ? 'active' : ''}>Abilities</button>
+            <button onClick={() => handleTabChange('ally-tips')} className={activeTab === 'ally-tips' ? 'active' : ''}>Ally Tips</button>
+            <button onClick={() => handleTabChange('enemy-tips')} className={activeTab === 'enemy-tips' ? 'active' : ''}>Enemy Tips</button>
           </div>
           {activeTab === 'about' && (
             <div className='about'>
