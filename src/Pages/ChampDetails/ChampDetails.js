@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getChampDetails } from './APIcalls';
+import { getChampDetails } from '../../API-Utility/APIcalls';
 import './ChampDetails.css';
 
 const validTabs = ['about', 'abilities', 'ally-tips', 'enemy-tips'];
