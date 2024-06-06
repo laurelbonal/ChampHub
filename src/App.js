@@ -1,10 +1,11 @@
 import { Route, Routes, BrowserRouter, Link } from 'react-router-dom';
 import './App.css';
-import Homepage from './Homepage';
+import Homepage from './Pages/HomePage/Homepage';
 import { useEffect, useState } from 'react';
-import { getChamps } from './APIcalls';
-import AllChamps from './AllChamps';
-import ChampDetails from './ChampDetails';
+import { getChamps } from './API-Utility/APIcalls';
+import AllChamps from './Pages/AllChamps/AllChamps';
+import ChampDetails from './Pages/ChampDetails/ChampDetails';
+import ErrorPage from './Pages/Error/ErrorPage';
 
 function App() {
   const [champData, setChampData] = useState([]);
@@ -26,7 +27,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/Champions' element={<AllChamps champData={champData} />} />
-          <Route path='/Champion/:name/:tab?' element={<ChampDetails />} /> 
+          <Route path='/Champion/:name/:tab/:ability?' element={<ChampDetails />} /> 
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
       </main>
     </BrowserRouter>

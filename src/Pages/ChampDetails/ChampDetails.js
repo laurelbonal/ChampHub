@@ -1,22 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getChampDetails } from './APIcalls';
+import { getChampDetails } from '../../API-Utility/APIcalls';
 import './ChampDetails.css';
 
+const validTabs = ['about', 'abilities', 'ally-tips', 'enemy-tips'];
+const validAbilities = ['Passive', 'Q', 'W', 'E', 'R'];
+
 export default function ChampDetails() {
-  const { name } = useParams();
+  const { name, tab, ability } = useParams();
   const navigate = useNavigate();
   const [champion, setChampion] = useState(null);
   const [selectedAbility, setSelectedAbility] = useState(null);
-  const [activeTab, setActiveTab] = useState('about'); 
+  const [activeTab, setActiveTab] = useState(tab || 'about'); 
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    // Validate tab and ability
+    const isValidTab = validTabs.includes(tab);
+    const isValidAbility = !ability || validAbilities.includes(ability);
+
+    if (!isValidTab || !isValidAbility) {
+      navigate('/error', { replace: true });
+      return;
+    }
+
+    if (!tab) {
+      navigate(`/Champion/${name}/about`, { replace: true });
+    }
+  }, [name, tab, ability, navigate]);
 
   useEffect(() => {
     const fetchChampionDetails = async () => {
       try {
         const champDetails = await getChampDetails(name);
         setChampion(champDetails);
-        setSelectedAbility({ ...champDetails.passive, key: 'Passive' }); 
+        if (!ability) {
+          setSelectedAbility({ ...champDetails.passive, key: 'Passive' });
+        } else {
+          const abilityMap = {
+            Passive: { ...champDetails.passive, key: 'Passive' },
+            Q: { ...champDetails.spells[0], key: 'Q' },
+            W: { ...champDetails.spells[1], key: 'W' },
+            E: { ...champDetails.spells[2], key: 'E' },
+            R: { ...champDetails.spells[3], key: 'R' },
+          };
+          setSelectedAbility(abilityMap[ability]);
+        }
       } catch (error) {
         console.error('Error fetching champion details:', error);
         setError(true);
@@ -24,21 +53,26 @@ export default function ChampDetails() {
     };
 
     fetchChampionDetails();
-  }, [name]);
+  }, [name, ability]);
+
+  useEffect(() => {
+    if (tab) {
+      setActiveTab(tab);
+    }
+  }, [tab]);
 
   const handleTabChange = (tab) => {
+    if (tab === 'abilities' && !ability) {
+      navigate(`/Champion/${name}/abilities/Passive`, { replace: true });
+    } else {
+      navigate(`/Champion/${name}/${tab}`, { replace: true });
+    }
     setActiveTab(tab);
-    navigate(`/champion/${name}/${tab}`, { replace: true });
   };
 
   const handleAbilityChange = (e) => {
-    const abilityIndex = e.target.value;
-    if (abilityIndex === 'passive') {
-      setSelectedAbility({ ...champion.passive, key: 'Passive' });
-    } else {
-      const keys = ['Q', 'W', 'E', 'R'];
-      setSelectedAbility({ ...champion.spells[abilityIndex], key: keys[abilityIndex] });
-    }
+    const abilityKey = e.target.value;
+    navigate(`/Champion/${name}/abilities/${abilityKey}`, { replace: true });
   };
 
   if (error) {
@@ -57,6 +91,8 @@ export default function ChampDetails() {
   const renderTips = (tips) => (
     tips.length > 0 ? tips.join(' ') : 'No tips at this time.'
   );
+
+  console.log('Selected Ability:', selectedAbility);
 
   return (
     <div className="champion-details">
@@ -92,10 +128,10 @@ export default function ChampDetails() {
           {activeTab === 'abilities' && (
             <div className="abilities-container">
               <h2>Abilities</h2>
-              <select aria-label='ability' onChange={handleAbilityChange}>
-                <option value="passive">[Passive] {champion.passive.name}</option>
+              <select aria-label='ability' onChange={handleAbilityChange} value={ability || 'Passive'}>
+                <option value="Passive">[Passive] {champion.passive.name}</option>
                 {champion.spells.map((spell, index) => (
-                  <option key={spell.id} value={index}>
+                  <option key={spell.id} value={['Q', 'W', 'E', 'R'][index]}>
                     {`[${['Q', 'W', 'E', 'R'][index]}] ${spell.name}`}
                   </option>
                 ))}
@@ -103,6 +139,9 @@ export default function ChampDetails() {
               {selectedAbility && (
                 <div className="ability-details">
                   <h3>{`[${selectedAbility.key}] ${selectedAbility.name}`}</h3>
+                  {selectedAbility.image && (
+                    <img src={`https://ddragon.leagueoflegends.com/cdn/14.11.1/img/spell/${selectedAbility.image.full}`} alt={`${selectedAbility.name} icon`} />
+                  )}
                   <p>{selectedAbility.description}</p>
                 </div>
               )}

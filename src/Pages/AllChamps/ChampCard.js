@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ChampCard.css';
-import formatChampionName from './Utility';
+import formatChampionName from '../../API-Utility/Utility';
 
 function ChampCard({ name, image, blurb }) {
     const navigate = useNavigate();
@@ -9,7 +9,7 @@ function ChampCard({ name, image, blurb }) {
 
     const handleCardClick = () => {
         const formattedName = formatChampionName(name);
-        navigate(`/Champion/${formattedName}`);
+        navigate(`/Champion/${formattedName}/about`);
     };
 
     return (
