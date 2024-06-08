@@ -36,7 +36,7 @@ export default function ErrorPage() {
         <div className="error-page">
             {getErrorMessage()}
             <img src='./urf_emote.webp' alt='urf-the-manatee'/>
-            <button className='home-button' onClick={() => navigate('/Champions')}>Back to All Champs</button>
+            <button className='home-button' onClick={() => navigate('/')}>Back to All Champs</button>
         </div>
     );
 }

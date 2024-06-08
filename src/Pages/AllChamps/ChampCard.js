@@ -10,7 +10,7 @@ function ChampCard({ name, image, blurb }) {
 
   const handleCardClick = () => {
     const formattedName = formatChampionName(name);
-    navigate(`/Champion/${formattedName}/about`);
+    navigate(`/${formattedName}/about`);
   };
 
   return (

@@ -13,7 +13,7 @@ export default function AllChamps({ champData }) {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname.toLowerCase() !== '/champions') {
+    if (location.pathname.toLowerCase() !== '/') {
       navigate('/error', { state: { message: 'Invalid URL', details: 'The URL you are trying to access does not exist or is malformed.', type: '404' }, replace: true });
     }
   }, [location.pathname, navigate]);

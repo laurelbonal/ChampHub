@@ -15,7 +15,6 @@ export default function ChampDetails() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    // Validate tab and ability
     const isValidTab = validTabs.includes(tab);
     const isValidAbility = !ability || validAbilities.includes(ability);
 
@@ -25,7 +24,7 @@ export default function ChampDetails() {
     }
 
     if (!tab) {
-      navigate(`/Champion/${name}/about`, { replace: true });
+      navigate(`/${name}/about`, { replace: true });
     }
   }, [name, tab, ability, navigate]);
 
@@ -64,23 +63,23 @@ export default function ChampDetails() {
 
   const handleTabChange = (tab) => {
     if (tab === 'abilities' && !ability) {
-      navigate(`/Champion/${name}/abilities/Passive`, { replace: true });
+      navigate(`/${name}/abilities/Passive`, { replace: true });
     } else {
-      navigate(`/Champion/${name}/${tab}`, { replace: true });
+      navigate(`/${name}/${tab}`, { replace: true });
     }
     setActiveTab(tab);
   };
 
   const handleAbilityChange = (e) => {
     const abilityKey = e.target.value;
-    navigate(`/Champion/${name}/abilities/${abilityKey}`, { replace: true });
+    navigate(`/${name}/abilities/${abilityKey}`, { replace: true });
   };
 
   if (error) {
     return (
       <div>
         <h2>Cannot display that champion's data right now.</h2>
-        <button className='home-button' onClick={() => navigate('/Champions')}>Back to All Champs</button>
+        <button className='home-button' onClick={() => navigate('/')}>Back to All Champs</button>
       </div>
     );
   }
@@ -118,46 +117,51 @@ export default function ChampDetails() {
             <button onClick={() => handleTabChange('ally-tips')} className={activeTab === 'ally-tips' ? 'active' : ''}>Ally Tips</button>
             <button onClick={() => handleTabChange('enemy-tips')} className={activeTab === 'enemy-tips' ? 'active' : ''}>Enemy Tips</button>
           </div>
-          {activeTab === 'about' && (
-            <div className='about'>
-              <h2>About</h2>
-              <p className="champion-blurb">
-                {champion.lore}
-              </p>
-            </div>
-          )}
-          {activeTab === 'abilities' && (
-            <div className="abilities-container">
-              <h2>Abilities</h2>
-              <select aria-label='ability' onChange={handleAbilityChange} value={ability || 'Passive'}>
-                <option value="Passive">[Passive] {champion.passive.name}</option>
-                {champion.spells.map((spell, index) => (
-                  <option key={spell.id} value={['Q', 'W', 'E', 'R'][index]}>
-                    {`[${['Q', 'W', 'E', 'R'][index]}] ${spell.name}`}
-                  </option>
-                ))}
-              </select>
-              {selectedAbility && (
-                <div className="selected-ability">
-                  <h3>{selectedAbility.name}</h3>
-                  <img src={`https://ddragon.leagueoflegends.com/cdn/14.11.1/img/${selectedAbility.key === 'Passive' ? 'passive' : 'spell'}/${selectedAbility.image.full}`} alt={selectedAbility.name} />
-                  <p>{selectedAbility.description}</p>
-                </div>
-              )}
-            </div>
-          )}
-          {activeTab === 'ally-tips' && (
-            <div className="ally-tips">
-              <h2>Ally Tips</h2>
-              <p>{renderTips(champion.allytips)}</p>
-            </div>
-          )}
-          {activeTab === 'enemy-tips' && (
-            <div className="enemy-tips">
-              <h2>Enemy Tips</h2>
-              <p>{renderTips(champion.enemytips)}</p>
-            </div>
-          )}
+          <div className='info-box'>
+            {activeTab === 'about' && (
+              <div className='about content-box'>
+                <h2>About</h2>
+                <p className="champion-blurb">
+                  {champion.lore}
+                </p>
+              </div>
+            )}
+            {activeTab === 'abilities' && (
+              <div className="abilities-container content-box">
+                <h2>Abilities</h2>
+                <select aria-label='ability' onChange={handleAbilityChange} value={ability || 'Passive'}>
+                  <option value="Passive">[Passive] {champion.passive.name}</option>
+                  {champion.spells.map((spell, index) => (
+                    <option key={spell.id} value={['Q', 'W', 'E', 'R'][index]}>
+                      {`[${['Q', 'W', 'E', 'R'][index]}] ${spell.name}`}
+                    </option>
+                  ))}
+                </select>
+                {selectedAbility && (
+                  <div className="selected-ability">
+                    <img src={`https://ddragon.leagueoflegends.com/cdn/14.11.1/img/${selectedAbility.key === 'Passive' ? 'passive' : 'spell'}/${selectedAbility.image.full}`} alt={selectedAbility.name} />
+                    <div className="selected-ability-description">
+                      <h3>{selectedAbility.name}</h3>
+                      <p>{selectedAbility.description}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            {activeTab === 'ally-tips' && (
+              <div className="ally-tips content-box">
+                <h2>Ally Tips</h2>
+                <p>{renderTips(champion.allytips)}</p>
+              </div>
+            )}
+            {activeTab === 'enemy-tips' && (
+              <div className="enemy-tips content-box">
+                <h2>Enemy Tips</h2>
+                <p>{renderTips(champion.enemytips)}</p>
+              </div>
+            )}
+          </div>
+          <button className='home-button' onClick={() => navigate('/')}>Back to All Champs</button>
         </div>
       </div>
     </div>

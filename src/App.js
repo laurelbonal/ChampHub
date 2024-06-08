@@ -19,14 +19,13 @@ function App() {
   return (
     <main className="App">
       <header className="header">
-        <Link to="/Champions" className="header-link" aria-label='back-to-home'>
+        <Link to="/" className="header-link" aria-label='back-to-home'>
           <h1>ChampionHub</h1>
         </Link>
       </header>
       <Routes>
-        
-        <Route path='/Champions' element={<AllChamps champData={champData} />} />
-        <Route path='/Champion/:name/:tab/:ability?' element={<ChampDetails />} />
+        <Route path='/' element={<AllChamps champData={champData} />} />
+        <Route path='/:name/:tab/:ability?' element={<ChampDetails />} />
         <Route path='/error' element={<ErrorPage />} />
         <Route path='*' element={<Navigate to="/error" state={{ message: 'Invalid URL', details: 'The URL you are trying to access does not exist or is malformed.', type: '404' }} />} />
       </Routes>
