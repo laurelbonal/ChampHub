@@ -52,6 +52,8 @@ For this application, I did E2E testing using Cypress. If you want to check out 
 
 1. Typescript
 2. Display "free to play" champions on the landing screen (yes, I'm going to bring it back after going through all the trouble to remove it)
-3. Allow user to choose language, to allow me to help people from multiple backgrounds
+3. Allow users to choose language, to allow me to help people from multiple backgrounds
+4. Add skins carousel to champion page
+5. Add common build paths
 
 ### Thank you for checking out ChampionHub! 
