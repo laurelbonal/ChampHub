@@ -4,7 +4,9 @@ describe('template spec', () => {
       statusCode: 200,
       fixture: 'AllChamps'
     }).as('getChamps')
+
     cy.visit('http://localhost:3000');
+
   });
   it('should display champions', ()=>{
     cy.wait('@getChamps')
