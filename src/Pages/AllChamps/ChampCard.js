@@ -1,15 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useParams, useNavigate } from 'react-router-dom';
 import './ChampCard.css';
+import formatChampionName from '../../API-Utility/Utility';
 
 function ChampCard({ name, image, blurb }) {
   const navigate = useNavigate();
+  const { name: paramName } = useParams();
 
   const handleCardClick = () => {
-    const formattedNameOne = name.split(" ").join('')
-    const formattedNameTwo = formattedNameOne.split("'").join('')
-    const formattedName = formattedNameTwo.charAt(0) + formattedNameTwo.substring(1).toLowerCase()
-    navigate(`/Champion/${formattedName}`);
+    const formattedName = formatChampionName(name);
+    navigate(`/${formattedName}/about`);
   };
 
   return (
@@ -20,5 +21,11 @@ function ChampCard({ name, image, blurb }) {
     </div>
   );
 }
+
+ChampCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  blurb: PropTypes.string.isRequired
+};
 
 export default ChampCard;

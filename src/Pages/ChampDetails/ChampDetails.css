@@ -176,3 +176,56 @@ button:hover {
   margin-top: 20px;
 }
 
+@media (max-width: 768px) {
+  .champion-info h1 {
+    font-size: 2em;
+  }
+  
+  .champion-info h2 {
+    font-size: 1.2em;
+  }
+  
+  .nav-tabs, .tips-buttons, .filter-controls, .champ-grid, .champion-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .champion-meta {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .champion-difficulty, .champion-role {
+    width: 45%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .champion-info h1 {
+    font-size: 1.5em;
+  }
+  
+  .champion-info h2 {
+    font-size: 1em;
+  }
+  
+  .champion-difficulty, .champion-role {
+    width: 45%;
+    max-width: none;
+  }
+  
+  .champion-meta {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+}

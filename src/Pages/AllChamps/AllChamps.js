@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './AllChamps.css';
 import ChampCard from './ChampCard';
 
@@ -7,6 +9,14 @@ export default function AllChamps({ champData }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname.toLowerCase() !== '/') {
+      navigate('/error', { state: { message: 'Invalid URL', details: 'The URL you are trying to access does not exist or is malformed.', type: '404' }, replace: true });
+    }
+  }, [location.pathname, navigate]);
 
   useEffect(() => {
     setFilteredChampions(champData);
@@ -87,7 +97,6 @@ export default function AllChamps({ champData }) {
           filteredChampions.map(champ => (
             <ChampCard
               key={champ.id}
-              name={champ.id} 
               image={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`}
               name={champ.name}
               blurb={champ.blurb}
@@ -100,3 +109,15 @@ export default function AllChamps({ champData }) {
     </div>
   );
 }
+
+AllChamps.propTypes = {
+  champData: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    blurb: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    info: PropTypes.shape({
+      difficulty: PropTypes.number.isRequired
+    }).isRequired
+  })).isRequired
+};
