@@ -20,7 +20,7 @@ export default function ChampDetails() {
     const isValidAbility = !ability || validAbilities.includes(ability);
 
     if (!isValidTab || !isValidAbility) {
-      navigate('/error', { replace: true });
+      navigate('/error', { state: { message: 'Invalid URL', details: 'The URL you are trying to access does not exist or is malformed.', type: '404' }, replace: true });
       return;
     }
 
@@ -32,7 +32,7 @@ export default function ChampDetails() {
   useEffect(() => {
     const fetchChampionDetails = async () => {
       try {
-        const champDetails = await getChampDetails(name);
+        const champDetails = await getChampDetails(name, navigate);
         setChampion(champDetails);
         if (!ability) {
           setSelectedAbility({ ...champDetails.passive, key: 'Passive' });
@@ -49,11 +49,12 @@ export default function ChampDetails() {
       } catch (error) {
         console.error('Error fetching champion details:', error);
         setError(true);
+        navigate('/error', { state: { message: `Error fetching details for champion ${name}`, details: error.message, type: 'api' }, replace: true });
       }
     };
 
     fetchChampionDetails();
-  }, [name, ability]);
+  }, [name, ability, navigate]);
 
   useEffect(() => {
     if (tab) {
@@ -137,29 +138,26 @@ export default function ChampDetails() {
                 ))}
               </select>
               {selectedAbility && (
-                <div className="ability-details">
-                  <h3>{`[${selectedAbility.key}] ${selectedAbility.name}`}</h3>
-                  {selectedAbility.image && (
-                    <img src={`https://ddragon.leagueoflegends.com/cdn/14.11.1/img/spell/${selectedAbility.image.full}`} alt={`${selectedAbility.name} icon`} />
-                  )}
+                <div className="selected-ability">
+                  <h3>{selectedAbility.name}</h3>
+                  <img src={`https://ddragon.leagueoflegends.com/cdn/14.11.1/img/${selectedAbility.key === 'Passive' ? 'passive' : 'spell'}/${selectedAbility.image.full}`} alt={selectedAbility.name} />
                   <p>{selectedAbility.description}</p>
                 </div>
               )}
             </div>
           )}
           {activeTab === 'ally-tips' && (
-            <div className="tips-section">
+            <div className="ally-tips">
               <h2>Ally Tips</h2>
               <p>{renderTips(champion.allytips)}</p>
             </div>
           )}
           {activeTab === 'enemy-tips' && (
-            <div className="tips-section">
+            <div className="enemy-tips">
               <h2>Enemy Tips</h2>
               <p>{renderTips(champion.enemytips)}</p>
             </div>
           )}
-          <button className='home-button' onClick={() => navigate('/Champions')}>Back to All Champs</button>
         </div>
       </div>
     </div>
